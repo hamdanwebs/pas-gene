@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Password Generator</title>
+</head>
+<body>
+    <h2>Password Generator</h2>
+    <button onclick="generatePassword()">Generate Password</button>
+    <p id="passwordDisplay"></p>
+    <i class="fa-solid fa-copy" onclick="copyToClipboard()" style="cursor: pointer;"></i>
+
+    <script>
+        let generatedPassword = '';
+
+        function generatePassword() {
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+            generatedPassword = '';
+            for (var i = 0; i < 12; i++) { // Default password length is 12
+                var randomIndex = Math.floor(Math.random() * characters.length);
+                generatedPassword += characters[randomIndex];
+            }
+            document.getElementById("passwordDisplay").innerText = "Generated Password: " + generatedPassword;
+        }
+
+        function copyToClipboard() {
+            if (generatedPassword) {
+                navigator.clipboard.writeText(generatedPassword).then(function() {
+                    alert("Password copied to clipboard!");
+                }).catch(function(err) {
+                    console.error("Error copying password: ", err);
+                });
+            } else {
+                alert("Generate a password first!");
+            }
+        }
+    </script>
+</body>
+</html>
